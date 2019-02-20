@@ -1,4 +1,4 @@
-# pdfjs
+# PdfJs
 Render PDF files on Browser With PDf.js
 This is a Follow Up Code of Traversy Media YouTube Channel
 
