@@ -1,4 +1,4 @@
-const url = '../docs/aaa.pdf';
+const url = '../docs/a1aa.pdf';
 
 let pdfDoc = null,
   pageNum = 1,
@@ -67,14 +67,26 @@ const showNextPage = () => {
 };
 //Get Document
 
-pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
-  pdfDoc = pdfDoc_;
-  //console.log(pdfDoc);
+pdfjsLib
+  .getDocument(url)
+  .promise.then(pdfDoc_ => {
+    pdfDoc = pdfDoc_;
+    //console.log(pdfDoc);
 
-  document.querySelector('#page-count').textContent = pdfDoc.numPages;
+    document.querySelector('#page-count').textContent = pdfDoc.numPages;
 
-  renderpage(pageNum);
-});
+    renderpage(pageNum);
+  })
+  .catch(err => {
+    //DIsplay Error
+    const div = document.createElement('div');
+    div.className = 'error';
+    div.appendChild(document.createTextNode(err.message));
+    document.querySelector('body').insertBefore(div, canvas);
+
+    //remove TopBar
+    document.querySelector('.top-bar').style.display = 'none';
+  });
 
 //Button Events
 document.querySelector('#prev-page').addEventListener('click', showPrevPage);
